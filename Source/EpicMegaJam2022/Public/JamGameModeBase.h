@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "EpicMegaJam2022GameModeBase.generated.h"
+#include "JamGameModeBase.generated.h"
 
 /**
  * 
