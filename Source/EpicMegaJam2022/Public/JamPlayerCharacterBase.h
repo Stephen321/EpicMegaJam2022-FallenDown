@@ -25,5 +25,12 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// Called to bind functionality to input
 
+private:
+	UPROPERTY(Category = Jam, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UCameraComponent* CameraComponent;
+	
+	UPROPERTY(Category = Jam, VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* SpringArmComponent;
 };

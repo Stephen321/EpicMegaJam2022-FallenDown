@@ -3,3 +3,17 @@
 
 #include "JamGameModeBase.h"
 
+#include "JamGameStateBase.h"
+#include "JamHUDBase.h"
+#include "JamPlayerCharacterBase.h"
+#include "JamPlayerControllerBase.h"
+#include "JamPlayerStateBase.h"
+
+AJamGameModeBase::AJamGameModeBase()
+{
+	GameStateClass = AJamGameStateBase::StaticClass();
+	PlayerControllerClass = AJamPlayerControllerBase::StaticClass();
+	PlayerStateClass = AJamPlayerStateBase::StaticClass();
+	HUDClass = AJamHUDBase::StaticClass();
+	DefaultPawnClass = AJamPlayerCharacterBase::StaticClass();
+}

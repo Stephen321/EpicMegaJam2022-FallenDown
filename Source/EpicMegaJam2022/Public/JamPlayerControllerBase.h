@@ -13,5 +13,6 @@ UCLASS()
 class EPICMEGAJAM2022_API AJamPlayerControllerBase : public APlayerController
 {
 	GENERATED_BODY()
-	
+
+public:
 };
