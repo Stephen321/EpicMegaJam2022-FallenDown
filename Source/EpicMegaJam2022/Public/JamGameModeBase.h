@@ -14,4 +14,6 @@ class EPICMEGAJAM2022_API AJamGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	AJamGameModeBase();
 };
