@@ -22,6 +22,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category="Jam")
 	void OnEndInteraction(UJamInteractableComponent* InteractableComponent);
 
+	UFUNCTION(BlueprintImplementableEvent, Category="Jam")
+	void OnInteract(UJamInteractableComponent* InteractableComponent);
+	
 	void SetOwningHUD(AJamHUDBase* InOwningHUD);
 
 private:

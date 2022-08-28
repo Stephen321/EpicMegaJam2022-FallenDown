@@ -25,6 +25,14 @@ void AJamHUDBase::EndInteraction(UJamInteractableComponent* InteractableComponen
 	}
 }
 
+void AJamHUDBase::OnInteract(UJamInteractableComponent* InteractableComponent)
+{
+	if (WidgetLevelHUD.IsValid())
+	{
+		WidgetLevelHUD->OnInteract(InteractableComponent);	
+	}
+}
+
 void AJamHUDBase::SetWidgetLevelHUD(UJamWidgetLevelHUD* InWidgetLevelHUD)
 {
 	WidgetLevelHUD = InWidgetLevelHUD;

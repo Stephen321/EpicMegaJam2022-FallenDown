@@ -6,6 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "JamInteractableComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInteract);
 
 UCLASS(ClassGroup=(Jam), meta=(BlueprintSpawnableComponent))
 class EPICMEGAJAM2022_API UJamInteractableComponent : public UBoxComponent
@@ -17,6 +18,9 @@ public:
 	UJamInteractableComponent();
 	virtual ~UJamInteractableComponent() override;
 
+	UPROPERTY(BlueprintAssignable, Category="Jam")
+	FOnInteract OnInteract;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -25,8 +29,11 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere,  Category="Jam")
-	FText Message;
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	bool IsInteractable() const;
+
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	void Interact(AActor* Interactor);
 
 private:
 	UFUNCTION()
@@ -34,4 +41,20 @@ private:
 	
 	UFUNCTION()
 	void ComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess), Category="Jam")
+	bool bCanInteractOnlyOnce = false;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess), Category="Jam")
+	float InteractCooldown = 3.f;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess), Category="Jam")
+	FText InteractText;
+
+private:
+	bool bInteractable;
+	FTimerHandle TimerHandle;
+
+	UPROPERTY()
+	TWeakObjectPtr<AActor> OverlappingActor;
 };

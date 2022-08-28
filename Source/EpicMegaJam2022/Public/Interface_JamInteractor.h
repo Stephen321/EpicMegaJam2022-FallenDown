@@ -21,15 +21,14 @@ class EPICMEGAJAM2022_API IInterface_JamInteractor
 {
 	GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	bool bCanInteract = false;
-	
+	// events
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Jam")
     void BeginInteraction(UJamInteractableComponent* InteractableComponent);
-    virtual void BeginInteraction_Implementation(UJamInteractableComponent* InteractableComponent);
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Jam")
     void EndInteraction(UJamInteractableComponent* InteractableComponent);
-    virtual void EndInteraction_Implementation(UJamInteractableComponent* InteractableComponent);
+	
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Jam")
+    void OnInteract(UJamInteractableComponent* InteractableComponent);
 };

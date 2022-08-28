@@ -23,6 +23,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void EndInteraction(UJamInteractableComponent* InteractableComponent);
+	
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	void OnInteract(UJamInteractableComponent* InteractableComponent);
 
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void SetWidgetLevelHUD(UJamWidgetLevelHUD* InWidgetLevelHUD);
