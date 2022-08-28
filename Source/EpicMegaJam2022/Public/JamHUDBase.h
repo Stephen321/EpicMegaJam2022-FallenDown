@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "JamWidgetBase.h"
 #include "GameFramework/HUD.h"
 #include "JamHUDBase.generated.h"
 
@@ -14,4 +15,5 @@ class EPICMEGAJAM2022_API AJamHUDBase : public AHUD
 	GENERATED_BODY()
 
 public:
+	AJamHUDBase();
 };
