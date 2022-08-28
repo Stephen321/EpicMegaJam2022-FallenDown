@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Interface_JamInteractor.h"
 #include "GameFramework/Character.h"
 #include "JamPlayerCharacterBase.generated.h"
 
 UCLASS()
-class EPICMEGAJAM2022_API AJamPlayerCharacterBase : public ACharacter
+class EPICMEGAJAM2022_API AJamPlayerCharacterBase : public ACharacter, public IInterface_JamInteractor
 {
 	GENERATED_BODY()
 
