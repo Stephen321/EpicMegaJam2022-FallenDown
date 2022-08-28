@@ -23,6 +23,9 @@ class EPICMEGAJAM2022_API AJamGameStateBase : public AGameStateBase
 public:
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void AddTokens(int32 Count);
+	
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	bool RemoveTokens(int32 Count);
 
 public: // Delegates
 	UPROPERTY(BlueprintAssignable, Category="Jam")

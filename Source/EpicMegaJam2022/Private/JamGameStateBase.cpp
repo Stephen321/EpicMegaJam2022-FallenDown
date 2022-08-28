@@ -9,3 +9,14 @@ void AJamGameStateBase::AddTokens(int32 Count)
 	Tokens += Count;
 	OnTokensChanged.Broadcast(Tokens);
 }
+
+bool AJamGameStateBase::RemoveTokens(int32 Count)
+{
+	if (Tokens >= Count)
+	{
+		Tokens -= Count;
+		OnTokensChanged.Broadcast(Tokens);
+		return true;
+	}
+	return false;
+}
