@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "JamResourceTypes.h"
 #include "GameFramework/GameStateBase.h"
 #include "JamGameStateBase.generated.h"
 
@@ -19,11 +20,21 @@ class EPICMEGAJAM2022_API AJamGameStateBase : public AGameStateBase
 
 
 public:
+	AJamGameStateBase();
+	
 	void AddTokens(int32 Count);
-	bool RemoveTokens(int32 Count);
+	void RemoveTokens(int32 Count);
 	int32 GetTokens() const { return Tokens; }
+	void ResetTokens() { Tokens = 0; }
+	
+	void ChangeBalance(int32 Count, EJamBalanceType& Type, EJamBalanceThreshold& OutThreshold);
+	int32 GetBalance() const { return Balance; }
+	void ResetBalance() { Balance = 0; }
 
 private:
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess), Category="Jam")
 	int32 Tokens;
+	
+	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess), Category="Jam")
+	int32 Balance;
 };
