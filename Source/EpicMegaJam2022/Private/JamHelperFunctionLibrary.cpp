@@ -3,3 +3,9 @@
 
 #include "JamHelperFunctionLibrary.h"
 
+#include "JamConstants.h"
+
+FName UJamHelperFunctionLibrary::GetInteractActionName()
+{
+	return JamConstants::InteractActionName;
+}

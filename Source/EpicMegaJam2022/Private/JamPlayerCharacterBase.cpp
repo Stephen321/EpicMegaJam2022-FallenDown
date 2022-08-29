@@ -25,7 +25,7 @@ AJamPlayerCharacterBase::AJamPlayerCharacterBase()
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(PlayerCharacterInternal::CameraComponentName);
 	CameraComponent->SetupAttachment(SpringArmComponent);
 }
-	
+
 // Called when the game starts or when spawned
 void AJamPlayerCharacterBase::BeginPlay()
 {

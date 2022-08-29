@@ -13,5 +13,8 @@ UCLASS()
 class EPICMEGAJAM2022_API UJamHelperFunctionLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-	
+
+public:
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	static FName GetInteractActionName();
 };
