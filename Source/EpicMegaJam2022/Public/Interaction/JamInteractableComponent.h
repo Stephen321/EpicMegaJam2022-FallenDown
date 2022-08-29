@@ -58,6 +58,9 @@ private:
 	FText InteractText;
 
 private:
+	void BeginInteraction(TWeakObjectPtr<AActor> Interactor);
+	void EndInteraction(TWeakObjectPtr<AActor> Interactor);
+	
 	bool bInteractable;
 	FTimerHandle TimerHandle;
 

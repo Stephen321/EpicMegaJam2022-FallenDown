@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "JamInteractableComponent.h"
+#include "Interaction/JamInteractableComponent.h"
 
-#include "Interface_JamInteractor.h"
-#include "JamHUDBase.h"
-#include "Interface_JamInteraction.h"
+#include "Interaction/Interface_JamInteractor.h"
+#include "Interaction/Interface_JamInteraction.h"
+#include "Interaction/JamInteractionSubsystem.h"
+
 #include "GameFramework/InputSettings.h"
 
 
@@ -80,15 +81,18 @@ void UJamInteractableComponent::Interact(AActor* Interactor)
 		{
 			IInterface_JamInteraction::Execute_Interact(Interaction.Get(), this, Interactor);
 		}
+		UWorld* World = GetWorld();
 		
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, FTimerDelegate::CreateLambda([this] ()
+		World->GetSubsystem<UJamInteractionSubsystem>()->HUDOnInteract(this);
+		
+		World->GetTimerManager().SetTimer(TimerHandle, FTimerDelegate::CreateLambda([this] ()
 		{
 			bInteractable = !bCanInteractOnlyOnce;
 
 			// if interactor hasnt moved out of the interaction bounds then trigger HUD again without needing to exit and enter
-			if (bInteractable && OverlappingActor.IsValid() && OverlappingActor->Implements<UInterface_JamInteractor>())
+			if (bInteractable)
 			{
-				IInterface_JamInteractor::Execute_BeginInteraction(OverlappingActor.Get(), this);
+				BeginInteraction(OverlappingActor.Get());
 			}
 		}), InteractCooldown, false);
 		
@@ -103,19 +107,31 @@ void UJamInteractableComponent::ComponentBeginOverlap(UPrimitiveComponent* Overl
 	{
 		return;
 	}
-	if (OtherActor && OtherActor->Implements<UInterface_JamInteractor>())
-	{
-		IInterface_JamInteractor::Execute_BeginInteraction(OtherActor, this);
-	}
+	BeginInteraction(OtherActor);
 }
 
 void UJamInteractableComponent::ComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	OverlappingActor.Reset();
-	if (OtherActor && OtherActor->Implements<UInterface_JamInteractor>())
+	EndInteraction(OtherActor);
+}
+
+void UJamInteractableComponent::BeginInteraction(TWeakObjectPtr<AActor> Interactor)
+{
+	if (Interactor.IsValid() && Interactor->Implements<UInterface_JamInteractor>())
 	{
-		IInterface_JamInteractor::Execute_EndInteraction(OtherActor, this);
+		IInterface_JamInteractor::Execute_EndInteraction(Interactor.Get(), this);
+		GetWorld()->GetSubsystem<UJamInteractionSubsystem>()->HUDBeginInteraction(this);
+	}
+}
+
+void UJamInteractableComponent::EndInteraction(TWeakObjectPtr<AActor> Interactor)
+{
+	if (Interactor.IsValid() && Interactor->Implements<UInterface_JamInteractor>())
+	{
+		IInterface_JamInteractor::Execute_EndInteraction(Interactor.Get(), this);
+		GetWorld()->GetSubsystem<UJamInteractionSubsystem>()->HUDEndInteraction(this);
 	}
 }
 
