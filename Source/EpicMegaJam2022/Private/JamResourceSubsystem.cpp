@@ -5,8 +5,6 @@
 
 #include "JamGameStateBase.h"
 
-PRAGMA_DISABLE_OPTIMIZATION
-
 void UJamResourceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
@@ -43,4 +41,3 @@ bool UJamResourceSubsystem::RemoveTokens(int32 Count)
 	}
 	return false;
 }
-PRAGMA_ENABLE_OPTIMIZATION
