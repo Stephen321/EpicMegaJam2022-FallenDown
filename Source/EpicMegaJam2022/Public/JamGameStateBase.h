@@ -6,8 +6,6 @@
 #include "GameFramework/GameStateBase.h"
 #include "JamGameStateBase.generated.h"
 
-// bp accessible events for changes to game state
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnTokensChanged, int32, Tokens);
 
 /**
  * Seeing as there is only over going to be 1 player. We keep Balance and Tokens here
@@ -21,15 +19,9 @@ class EPICMEGAJAM2022_API AJamGameStateBase : public AGameStateBase
 
 
 public:
-	UFUNCTION(BlueprintCallable, Category="Jam")
 	void AddTokens(int32 Count);
-	
-	UFUNCTION(BlueprintCallable, Category="Jam")
 	bool RemoveTokens(int32 Count);
-
-public: // Delegates
-	UPROPERTY(BlueprintAssignable, Category="Jam")
-	FOnTokensChanged OnTokensChanged;
+	int32 GetTokens() const { return Tokens; }
 
 private:
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess), Category="Jam")

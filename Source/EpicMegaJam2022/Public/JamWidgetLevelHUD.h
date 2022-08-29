@@ -28,6 +28,6 @@ public:
 	void SetOwningHUD(AJamHUDBase* InOwningHUD);
 
 private:
-	UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess))
+	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess))
 	TWeakObjectPtr<AJamHUDBase> OwningHUD;
 };
