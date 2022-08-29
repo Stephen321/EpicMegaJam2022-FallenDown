@@ -5,7 +5,7 @@
 
 #include "Interface_JamInteractor.h"
 #include "JamHUDBase.h"
-#include "Interface_JamInteractAction.h"
+#include "Interface_JamInteraction.h"
 #include "GameFramework/InputSettings.h"
 
 
@@ -38,21 +38,16 @@ void UJamInteractableComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (!InteractActionInterface)
+	Interactions.Empty();
+	AActor* Owner = GetOwner();
+	if (Owner->Implements<UInterface_JamInteraction>())
 	{
-		AActor* Owner = GetOwner();
-		if (Owner->Implements<UInterface_JamInteractAction>())
-		{
-			InteractActionInterface = Owner;
-		}
-
-		
-		TArray<UActorComponent*> Components = Owner->GetComponentsByInterface(UInterface_JamInteractAction::StaticClass());
-		if (Components.Num() > 0)
-		{
-			InteractActionInterface = Components[0];
-		}
+		Interactions.Add(Owner);
 	}
+
+	
+	TArray<UActorComponent*> InteractionComponents = Owner->GetComponentsByInterface(UInterface_JamInteraction::StaticClass());
+	Interactions.Append(InteractionComponents);
 }
 
 
@@ -81,9 +76,9 @@ void UJamInteractableComponent::Interact(AActor* Interactor)
 	{
 		bInteractable = false;
 		OnInteract.Broadcast(); 
-		if (InteractActionInterface)
+		for (auto& Interaction : Interactions)
 		{
-			IInterface_JamInteractAction::Execute_Interact(InteractActionInterface.Get(), this, Interactor);
+			IInterface_JamInteraction::Execute_Interact(Interaction.Get(), this, Interactor);
 		}
 		
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, FTimerDelegate::CreateLambda([this] ()

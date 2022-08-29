@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "Interface_JamInteractAction.generated.h"
+#include "Interface_JamInteraction.generated.h"
 
 class UJamInteractableComponent;
 // This class does not need to be modified.
 UINTERFACE()
-class UInterface_JamInteractAction : public UInterface
+class UInterface_JamInteraction : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -17,7 +17,7 @@ class UInterface_JamInteractAction : public UInterface
 /**
  * 
  */
-class EPICMEGAJAM2022_API IInterface_JamInteractAction
+class EPICMEGAJAM2022_API IInterface_JamInteraction
 {
 	GENERATED_BODY()
 

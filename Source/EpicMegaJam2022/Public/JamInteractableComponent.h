@@ -7,8 +7,8 @@
 #include "UObject/WeakInterfacePtr.h"
 #include "JamInteractableComponent.generated.h"
 
-class IInterface_JamInteractAction;
-class UInterface_JamInteractAction;
+class IInterface_JamInteraction;
+class UInterface_JamInteraction;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInteract);
 
 UCLASS(ClassGroup=(Jam), meta=(BlueprintSpawnableComponent))
@@ -65,5 +65,5 @@ private:
 	TWeakObjectPtr<AActor> OverlappingActor;
 	
 	UPROPERTY()
-	TObjectPtr<UObject> InteractActionInterface;
+	TArray<TObjectPtr<UObject>> Interactions;
 };
