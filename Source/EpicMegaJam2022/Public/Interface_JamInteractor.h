@@ -23,12 +23,12 @@ class EPICMEGAJAM2022_API IInterface_JamInteractor
 
 public:
 	// events
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Jam")
+	UFUNCTION(BlueprintImplementableEvent, Category="Jam")
     void BeginInteraction(UJamInteractableComponent* InteractableComponent);
 	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Jam")
+	UFUNCTION(BlueprintImplementableEvent, Category="Jam")
     void EndInteraction(UJamInteractableComponent* InteractableComponent);
 	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category="Jam")
+	UFUNCTION(BlueprintImplementableEvent, Category="Jam")
     void OnInteract(UJamInteractableComponent* InteractableComponent);
 };

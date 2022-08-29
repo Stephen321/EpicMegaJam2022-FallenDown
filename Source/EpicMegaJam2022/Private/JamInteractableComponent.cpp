@@ -5,6 +5,7 @@
 
 #include "Interface_JamInteractor.h"
 #include "JamHUDBase.h"
+#include "Interface_JamInteractAction.h"
 #include "GameFramework/InputSettings.h"
 
 
@@ -36,6 +37,22 @@ UJamInteractableComponent::~UJamInteractableComponent()
 void UJamInteractableComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (!InteractActionInterface)
+	{
+		AActor* Owner = GetOwner();
+		if (Owner->Implements<UInterface_JamInteractAction>())
+		{
+			InteractActionInterface = Owner;
+		}
+
+		
+		TArray<UActorComponent*> Components = Owner->GetComponentsByInterface(UInterface_JamInteractAction::StaticClass());
+		if (Components.Num() > 0)
+		{
+			InteractActionInterface = Components[0];
+		}
+	}
 }
 
 
@@ -53,12 +70,22 @@ bool UJamInteractableComponent::IsInteractable() const
 	return bInteractable;
 }
 
+void UJamInteractableComponent::SetInteractable(bool bInInteractable)
+{
+	bInteractable = bInInteractable;
+}
+
 void UJamInteractableComponent::Interact(AActor* Interactor)
 {
 	if (bInteractable)
 	{
 		bInteractable = false;
-		OnInteract.Broadcast();	
+		OnInteract.Broadcast(); 
+		if (InteractActionInterface)
+		{
+			IInterface_JamInteractAction::Execute_Interact(InteractActionInterface.Get(), this, Interactor);
+		}
+		
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, FTimerDelegate::CreateLambda([this] ()
 		{
 			bInteractable = !bCanInteractOnlyOnce;

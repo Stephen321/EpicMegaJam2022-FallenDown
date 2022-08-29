@@ -4,8 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
+#include "UObject/WeakInterfacePtr.h"
 #include "JamInteractableComponent.generated.h"
 
+class IInterface_JamInteractAction;
+class UInterface_JamInteractAction;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInteract);
 
 UCLASS(ClassGroup=(Jam), meta=(BlueprintSpawnableComponent))
@@ -31,6 +34,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	bool IsInteractable() const;
+	
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	void SetInteractable(bool bInInteractable);
 
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void Interact(AActor* Interactor);
@@ -57,4 +63,7 @@ private:
 
 	UPROPERTY()
 	TWeakObjectPtr<AActor> OverlappingActor;
+	
+	UPROPERTY()
+	TObjectPtr<UObject> InteractActionInterface;
 };
