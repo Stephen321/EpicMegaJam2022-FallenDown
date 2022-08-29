@@ -31,6 +31,6 @@ public:
 	void SetWidgetLevelHUD(UJamWidgetLevelHUD* InWidgetLevelHUD);
 
 private:
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess))
 	TWeakObjectPtr<UJamWidgetLevelHUD> WidgetLevelHUD;
 };
