@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Interface_JamInteractor.h"
+#include "Interaction/Interface_JamInteractor.h"
 #include "GameFramework/Character.h"
 #include "JamPlayerCharacterBase.generated.h"
 

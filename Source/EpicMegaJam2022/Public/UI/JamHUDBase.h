@@ -2,9 +2,11 @@
 
 #pragma once
 
+#include "JamWidgetLevelHUD.h"
 #include "GameFramework/HUD.h"
 #include "JamHUDBase.generated.h"
 
+class UJamWidgetMainMenuLevelHUD;
 class UJamWidgetLevelHUD;
 class UJamInteractableComponent;
 /**
@@ -17,20 +19,17 @@ class EPICMEGAJAM2022_API AJamHUDBase : public AHUD
 
 public:
 	AJamHUDBase();
-	
-	UFUNCTION(BlueprintCallable, Category="Jam")
-	void BeginInteraction(UJamInteractableComponent* InteractableComponent);
-	
-	UFUNCTION(BlueprintCallable, Category="Jam")
-	void EndInteraction(UJamInteractableComponent* InteractableComponent);
-	
-	UFUNCTION(BlueprintCallable, Category="Jam")
-	void OnInteract(UJamInteractableComponent* InteractableComponent);
 
+protected:
+	
+public:
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void SetWidgetLevelHUD(UJamWidgetLevelHUD* InWidgetLevelHUD);
-
+	
+	TWeakObjectPtr<UJamWidgetLevelHUD> GetWidgetLevelHUD() const { return WidgetLevelHUD; }
+	
 private:
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess))
 	TWeakObjectPtr<UJamWidgetLevelHUD> WidgetLevelHUD;
+	
 };

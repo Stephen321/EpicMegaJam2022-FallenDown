@@ -4,7 +4,7 @@
 #include "JamGameModeBase.h"
 
 #include "JamGameStateBase.h"
-#include "JamHUDBase.h"
+#include "UI/JamHUDBase.h"
 #include "JamPlayerCharacterBase.h"
 #include "JamPlayerControllerBase.h"
 #include "JamPlayerStateBase.h"
