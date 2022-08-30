@@ -4,4 +4,5 @@
 namespace JamConstants
 {
 	const FName InteractActionName = TEXT("Interact");
+
 }
