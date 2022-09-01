@@ -19,8 +19,11 @@ void UJamInteractionSubsystem::OnWorldBeginPlay(UWorld& InWorld)
 	InWorld.GetTimerManager().SetTimerForNextTick([this, &InWorld]()
 	{
 		AJamHUDBase* HUD = Cast<AJamHUDBase>(InWorld.GetFirstPlayerController()->GetHUD());
-		ActiveWidgetLevelHUD = HUD->GetWidgetLevelHUD();
-		ensure(ActiveWidgetLevelHUD.IsValid());
+		if (HUD)
+		{
+			ActiveWidgetLevelHUD = HUD->GetWidgetLevelHUD();
+			ensure(ActiveWidgetLevelHUD.IsValid());
+		}
 	});
 }
 
