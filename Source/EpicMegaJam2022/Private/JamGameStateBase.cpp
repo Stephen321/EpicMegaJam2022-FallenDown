@@ -71,3 +71,8 @@ void AJamGameStateBase::ChangeBalance(int32 Count, EJamBalanceType& Type, EJamBa
 	}
 }
 
+bool AJamGameStateBase::GetGameWon()
+{
+	return bGameWon;
+}
+

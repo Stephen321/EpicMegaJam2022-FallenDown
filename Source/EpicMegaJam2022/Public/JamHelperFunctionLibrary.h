@@ -17,4 +17,10 @@ class EPICMEGAJAM2022_API UJamHelperFunctionLibrary : public UBlueprintFunctionL
 public:
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	static FName GetInteractActionName();
+	
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	static void SaveGame(UObject* WorldContextObject);
+	
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	static bool IsGameWon(UObject* WorldContextObject);
 };

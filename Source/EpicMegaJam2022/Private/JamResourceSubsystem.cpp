@@ -20,6 +20,15 @@ void UJamResourceSubsystem::Deinitialize()
 	Super::Deinitialize();
 }
 
+bool UJamResourceSubsystem::GetGameWon()
+{
+	if (GameState.IsValid())
+	{
+		return GameState->GetGameWon();
+	}
+	return false;
+}
+
 void UJamResourceSubsystem::AddTokens(int32 Count)
 {
 	if (GameState.IsValid())
@@ -45,6 +54,15 @@ void UJamResourceSubsystem::ResetTokens()
 		GameState->ResetTokens();
 		OnTokensChanged.Broadcast(GameState->GetTokens());
 	}
+}
+
+int32 UJamResourceSubsystem::GetTokens()
+{
+	if (GameState.IsValid())
+	{
+		return GameState->GetTokens();
+	}
+	return 0;
 }
 
 void UJamResourceSubsystem::ChangeBalance(EJamBalanceType Direction, EJamBalanceAmount Amount)

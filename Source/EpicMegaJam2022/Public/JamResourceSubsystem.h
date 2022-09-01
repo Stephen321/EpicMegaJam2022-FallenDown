@@ -27,6 +27,9 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	virtual void Deinitialize() override;
 	
+	// TODO: this really shouldn't be here...
+	bool GetGameWon();
+	
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void AddTokens(int32 Count);
 	
@@ -35,6 +38,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void ResetTokens();
+	
+	UFUNCTION(BlueprintCallable, Category="Jam")
+	int32 GetTokens();
 
 	UFUNCTION(BlueprintCallable, Category="Jam")
 	void ChangeBalance(EJamBalanceType Direction, EJamBalanceAmount Amount);

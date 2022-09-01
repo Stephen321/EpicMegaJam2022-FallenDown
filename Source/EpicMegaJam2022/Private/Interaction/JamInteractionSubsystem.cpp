@@ -2,6 +2,8 @@
 
 
 #include "Interaction/JamInteractionSubsystem.h"
+
+#include "JamPlayerCharacterBase.h"
 #include "Interaction/Interface_JamInteractor.h"
 
 #include "UI/JamHUDBase.h"
@@ -18,11 +20,14 @@ void UJamInteractionSubsystem::OnWorldBeginPlay(UWorld& InWorld)
 	
 	InWorld.GetTimerManager().SetTimerForNextTick([this, &InWorld]()
 	{
-		AJamHUDBase* HUD = Cast<AJamHUDBase>(InWorld.GetFirstPlayerController()->GetHUD());
-		if (HUD)
+		if (Cast<AJamPlayerCharacterBase>(InWorld.GetFirstPlayerController()))
 		{
-			ActiveWidgetLevelHUD = HUD->GetWidgetLevelHUD();
-			ensure(ActiveWidgetLevelHUD.IsValid());
+			AJamHUDBase* HUD = Cast<AJamHUDBase>(InWorld.GetFirstPlayerController()->GetHUD());
+			if (HUD)
+			{
+				ActiveWidgetLevelHUD = HUD->GetWidgetLevelHUD();
+				ensure(ActiveWidgetLevelHUD.IsValid());
+			}
 		}
 	});
 }

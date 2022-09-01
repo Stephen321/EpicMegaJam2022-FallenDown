@@ -30,6 +30,7 @@ public:
 	void ChangeBalance(int32 Count, EJamBalanceType& Type, EJamBalanceThreshold& OutThreshold);
 	int32 GetBalance() const { return Balance; }
 	void ResetBalance() { Balance = 0; }
+	bool GetGameWon();
 
 private:
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess), Category="Jam")
@@ -37,4 +38,7 @@ private:
 	
 	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess), Category="Jam")
 	int32 Balance;
+	
+	UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess), Category="Jam")
+	bool bGameWon;
 };
