@@ -19,13 +19,14 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnBalanceThresholdReached, EJamBal
  * State stored on GameState but logic handled by this subsystem
  */
 UCLASS()
-class EPICMEGAJAM2022_API UJamResourceSubsystem : public UGameInstanceSubsystem
+class EPICMEGAJAM2022_API UJamResourceSubsystem : public UWorldSubsystem
 {
 	GENERATED_BODY()
 
 public:
-	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
-	virtual void Deinitialize() override;
+	virtual void PostInitialize() override;
+	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
+	virtual void OnWorldComponentsUpdated(UWorld& World) override;
 	
 	// TODO: this really shouldn't be here...
 	bool GetGameWon();

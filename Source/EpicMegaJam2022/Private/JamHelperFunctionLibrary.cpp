@@ -24,7 +24,7 @@ void UJamHelperFunctionLibrary::SaveGame(UObject* WorldContextObject)
 	// TODO: do all this better...ew
 	if (World)
 	{
-		UJamResourceSubsystem* ResourceSubsystem = UGameInstance::GetSubsystem<UJamResourceSubsystem>(World->GetGameInstance());
+		UJamResourceSubsystem* ResourceSubsystem = World->GetSubsystem<UJamResourceSubsystem>();
 		if (ResourceSubsystem)
 		{
 
@@ -56,7 +56,7 @@ bool UJamHelperFunctionLibrary::IsGameWon(UObject* WorldContextObject)
 	// TODO: do all this better...ew
 	if (World)
 	{
-		UJamResourceSubsystem* ResourceSubsystem = UGameInstance::GetSubsystem<UJamResourceSubsystem>(World->GetGameInstance());
+		UJamResourceSubsystem* ResourceSubsystem = World->GetSubsystem<UJamResourceSubsystem>();
 		if (ResourceSubsystem)
 		{
 			UJamGameStateSaveGame* SaveGame = nullptr;

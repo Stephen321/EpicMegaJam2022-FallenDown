@@ -5,19 +5,23 @@
 
 #include "JamGameStateBase.h"
 
-void UJamResourceSubsystem::Initialize(FSubsystemCollectionBase& Collection)
+void UJamResourceSubsystem::PostInitialize()
 {
-	Super::Initialize(Collection);
+	Super::PostInitialize();
+}
 
-	GetWorld()->OnActorsInitialized.AddLambda([this](const UWorld::FActorsInitializedParams& Params)
+void UJamResourceSubsystem::OnWorldBeginPlay(UWorld& InWorld)
+{
+	Super::OnWorldBeginPlay(InWorld);
+	InWorld.GetTimerManager().SetTimerForNextTick([this, &InWorld]()
 	{
-		GameState = Cast<AJamGameStateBase>(Params.World->GetGameState());
+		GameState = Cast<AJamGameStateBase>(InWorld.GetGameState());
 	});
 }
 
-void UJamResourceSubsystem::Deinitialize()
+void UJamResourceSubsystem::OnWorldComponentsUpdated(UWorld& World)
 {
-	Super::Deinitialize();
+	Super::OnWorldComponentsUpdated(World);
 }
 
 bool UJamResourceSubsystem::GetGameWon()
