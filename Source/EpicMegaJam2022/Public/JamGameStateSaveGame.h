@@ -17,5 +17,5 @@ class EPICMEGAJAM2022_API UJamGameStateSaveGame : public USaveGame
 
 public:
 	UPROPERTY(VisibleAnywhere, Category="Jam")
-	bool bGameWon;
+	bool bGameWon = false;
 };
